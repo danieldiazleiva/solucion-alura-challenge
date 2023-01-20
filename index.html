@@ -11,8 +11,9 @@
         var abc = ["a", "e", "i", "o", "u"];
         var abc1 = ["á", "é", "í", "ó", "ú"];
         var codigo = ["ai", "enter", "imes", "ober", "ufat"]
-        var aux1 = 0;
-        var aux2 = 0;
+        var aux1 = 1;
+        var aux2 = 1;
+        var aux3 = 3;
         var n;
         var car = [2, 5, 4, 4, 4];
 
@@ -26,84 +27,114 @@
             }
             return cadena;
         }
-
+        function reiniciar() {
+            document.getElementById("info1").textContent = "No hay texto ingresado";
+            document.getElementById("info2").textContent = "Ingrese texto (las mayúsculas se cambiarán por minúsculas y los acentos se suprimirán)";
+            document.getElementById("img2").style.visibility = "visible";
+            document.getElementById("btn3").style.visibility = "hidden";
+            document.getElementById("texto-ingresado").value = "Ingrese texto";
+            document.getElementById("texto-encriptado").value = "";
+            aux3 = 3;
+            aux1 = 1;
+            aux2 = 1;
+        }
         function encriptar() {
+
             if (aux1 == 0) {
-                aux1 = 1;
-                aux2 = 1;
-                document.getElementById("info1").textContent = "Presione COPIAR para DESENCRIPTAR el texto";
-                document.getElementById("info2").textContent = "Presione REINICIAR para ingresar nuevo texto";
-                document.getElementById("img2").style.visibility = "hidden";
-                document.getElementById("btn3").style.visibility = "visible";
-                var txt = document.getElementById("texto-ingresado").value.toLowerCase();
-                var arreglo2 = [];
-                arreglo2 = txt.split("");
-                arreglo2 = acento(arreglo2);
-                var arregloenc = [];
-                for (var a = 0; a < arreglo2.length; a++) {
-                    n = 1;
-                    if (arreglo2[a] == " ") {
-                        arregloenc[a] = " ";
-                    }
-                    else {
-                        for (var h = 0; h < 5; h++) {
-                            if (arreglo2[a] == abc[h]) {
-                                arregloenc[a] = codigo[h];
-                                n = 0;
+                if (document.getElementById("texto-ingresado").value == "") {
+                    alert("no ha ingresado texto");
+                    reiniciar();
+                }
+                else {
+                    aux1 = 1;
+                    aux2 = 1;
+                    document.getElementById("info1").textContent = "Presione COPIAR para DESENCRIPTAR el texto";
+                    document.getElementById("info2").textContent = "Presione REINICIAR para ingresar nuevo texto";
+                    document.getElementById("img2").style.visibility = "hidden";
+                    document.getElementById("btn3").style.visibility = "visible";
+                    var txt = document.getElementById("texto-ingresado").value.toLowerCase();
+                    var arreglo2 = [];
+                    arreglo2 = txt.split("");
+                    arreglo2 = acento(arreglo2);
+                    var arregloenc = [];
+                    for (var a = 0; a < arreglo2.length; a++) {
+                        n = 1;
+                        if (arreglo2[a] == " ") {
+                            arregloenc[a] = " ";
+                        }
+                        else {
+                            for (var h = 0; h < 5; h++) {
+                                if (arreglo2[a] == abc[h]) {
+                                    arregloenc[a] = codigo[h];
+                                    n = 0;
+                                }
+                            }
+                            if (n == 1) {
+                                arregloenc[a] = arreglo2[a];
                             }
                         }
-                        if (n == 1) {
-                            arregloenc[a] = arreglo2[a];
-                        }
                     }
+                    document.getElementById("texto-encriptado").value = arregloenc.join("");
+                    document.getElementById("texto-ingresado").value = "";
+                    txtcontrol = 0;
                 }
-                document.getElementById("texto-encriptado").value = arregloenc.join("");
-                document.getElementById("texto-ingresado").value = "";
-                txtcontrol = 0;
             }
         }
-
+        function cursor() {
+            if (aux3 == 3) {
+                aux3 = 0;
+                document.getElementById("texto-ingresado").value = "";
+                aux1 = 0;
+                aux2 = 0;
+            }
+        }
         function desencriptar() {
+
             if (aux2 == 0) {
-                aux2 = 1;
-                aux1 = 1;
-                document.getElementById("info1").textContent = "El texto ha sido revelado";
-                document.getElementById("info2").textContent = "Presione REINICIAR para ingresar nuevo texto";
-                document.getElementById("img2").style.visibility = "hidden";
-                document.getElementById("btn3").style.visibility = "visible";
-                var txt2 = document.getElementById("texto-ingresado").value.toLowerCase();
-                var auxencriptado = [];
-                auxencriptado = txt2.split("");
-                auxencriptado = acento(auxencriptado);
-                var arreglo = [];
-                var w = 0;
-                var a = 0;
-                while (a < auxencriptado.length) {
-                    n = 1;
-                    if (auxencriptado[a] == " ") {
-                        arreglo[w] = " ";
-                        a = a + 1;
-                        w = w + 1;
-                    }
-                    else {
-                        for (var h = 0; h < 5; h++) {
-                            if (auxencriptado[a] == abc[h]) {
-                                arreglo[w] = abc[h];
-                                n = 0;
-                                a = a + car[h];
-                                w = w + 1;
-                            }
-                        }
-                        if (n == 1) {
-                            arreglo[w] = auxencriptado[a];
+                if (document.getElementById("texto-ingresado").value == "") {
+                    alert("no ha ingresado texto");
+                    reiniciar();
+                } else {
+                    aux2 = 1;
+                    aux1 = 1;
+                    document.getElementById("info1").textContent = "El texto ha sido revelado";
+                    document.getElementById("info2").textContent = "Presione REINICIAR para ingresar nuevo texto o COPIAR para volver a encriptar";
+                    document.getElementById("img2").style.visibility = "hidden";
+                    document.getElementById("btn3").style.visibility = "visible";
+                    var txt2 = document.getElementById("texto-ingresado").value.toLowerCase();
+                    var auxencriptado = [];
+                    auxencriptado = txt2.split("");
+                    auxencriptado = acento(auxencriptado);
+                    var arreglo = [];
+                    var w = 0;
+                    var a = 0;
+                    while (a < auxencriptado.length) {
+                        n = 1;
+                        if (auxencriptado[a] == " ") {
+                            arreglo[w] = " ";
                             a = a + 1;
                             w = w + 1;
                         }
+                        else {
+                            for (var h = 0; h < 5; h++) {
+                                if (auxencriptado[a] == abc[h]) {
+                                    arreglo[w] = abc[h];
+                                    n = 0;
+                                    a = a + car[h];
+                                    w = w + 1;
+                                }
+                            }
+                            if (n == 1) {
+                                arreglo[w] = auxencriptado[a];
+                                a = a + 1;
+                                w = w + 1;
+                            }
+                        }
                     }
+                    document.getElementById("texto-encriptado").value = arreglo.join("");
+                    document.getElementById("texto-ingresado").value = "";
+                    txtcontrol = 1;
                 }
-                document.getElementById("texto-encriptado").value = arreglo.join("");
-                document.getElementById("texto-ingresado").value = "";
-                txtcontrol = 1;
             }
         }
 
@@ -130,18 +161,19 @@
         <img src="imagenes/logo.png">
     </div>
     <div class="texto">
-        <textarea id="texto-ingresado" class="input-texto-ingresado" wrap="hard" rows="10"
-            onclick="this.value=''">ingrese texto</textarea>
+        <textarea id="texto-ingresado" class="input-texto-ingresado" wrap="hard"
+            onclick="cursor()">ingrese texto</textarea>
     </div>
     <div class="resultado">
         <div class="texto-encriptado">
-            <textarea id="texto-encriptado" class="input-texto-encriptado" wrap="hard" rows="10" disabled> </textarea>
+            <textarea id="texto-encriptado" class="input-texto-encriptado" wrap="hard" disabled> </textarea>
             <img class="img" id="img2" src="imagenes/logo2.png" style="visibility: visible;">
             <div class="info1">
                 <h2 id="info1" style="visibility: visible;"> No hay texto Ingresado </h2>
             </div>
             <div class="info2">
-                <h3 id="info2" style="visibility: visible;"> ingrese el texto que desea encriptar </h3>
+                <h3 id="info2" style="visibility: visible;"> Ingrese texto (las mayúsculas se cambiarán por minúsculas y
+                    los acentos se suprimirán) </h3>
             </div>
         </div>
         <div class="copiar">
@@ -151,7 +183,7 @@
     <div class="botones">
         <button class="botton" name="btn1" id="btn1" onclick="encriptar()">ENCRIPTAR</button>
         <button class="botton" name="btn2" id="btn2" onclick="desencriptar()">DESENCRIPTAR</button>
-        <button class="botton" name="btn4" id="btn4" onclick="dreiniciar()">REINICIAR</button>
+        <button class="botton" name="btn4" id="btn4" onclick="reiniciar()">REINICIAR</button>
     </div>
     <footer class="footer">
         <p class="copyrigth"> © Encriptador by Daniel Díaz Leiva </p>
