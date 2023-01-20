@@ -4,11 +4,11 @@
     max-height: 1024px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     /*border: solid 2px red;*/
-    grid-template: "lg lg lg" 11%
-        ". txt res" 66%
-        "btn btn res" 13%
-        "ft ft ft" 10% /
-        5% 60% 35%;
+    grid-template: "lg lg" 11%
+        "txt res" 66%
+        "btn res" 13%
+        "ft ft" 10% /
+        60% 40%;
 
 }
 
@@ -20,7 +20,8 @@
 .texto {
     grid-area: txt;
     display: flex;
-}
+    align-items: center;
+    }
 
 .botones {
     grid-area: btn;
@@ -132,10 +133,11 @@ textarea {
     color: beige;
     font-weight: 400;
     font-size: 20px;
+    min-width: 190px;
     max-width: 220px;
-    width: 20vw;
+    width: 18vw;
     height: 67px;
-    min-width: 200px;
+    
     margin: 10px;
 
     /* Dark blue/dark-blue-300 */
@@ -203,12 +205,11 @@ p {
 }   
 }
 }*/
-@media screen and (max-width: 780px){
+@media screen and (max-width: 880px){
 
     .caja {
         display: grid;
-        max-width: 780px;
-        min-width: 320px;
+        max-width: 880px;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         /*border: solid 2px red;*/
         grid-template: "lg" 10%
